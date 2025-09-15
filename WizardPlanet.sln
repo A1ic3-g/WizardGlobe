@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardPlanet", "WizardPlanet\WizardPlanet.csproj", "{2ED16657-EDC5-4BE2-A3AF-73F54AAAF63C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardPlanetTests", "WizardPlanetTests\WizardPlanetTests.csproj", "{B00793A6-C48B-47F3-A53E-335D06054F50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ED16657-EDC5-4BE2-A3AF-73F54AAAF63C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED16657-EDC5-4BE2-A3AF-73F54AAAF63C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED16657-EDC5-4BE2-A3AF-73F54AAAF63C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED16657-EDC5-4BE2-A3AF-73F54AAAF63C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B00793A6-C48B-47F3-A53E-335D06054F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B00793A6-C48B-47F3-A53E-335D06054F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B00793A6-C48B-47F3-A53E-335D06054F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00793A6-C48B-47F3-A53E-335D06054F50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
