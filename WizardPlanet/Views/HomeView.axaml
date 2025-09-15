@@ -1,0 +1,15 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WizardPlanet.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="WizardPlanet.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+    <Grid RowDefinitions="*,Auto,Auto,*">
+        <Button Grid.Row="1" Content="Create Animation" Command="{Binding CreateAnimationCommand}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Grid.Row="2" Content="Play Animation" Command="{Binding PlayAnimationCommand}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" />
+    </Grid>
+</UserControl>

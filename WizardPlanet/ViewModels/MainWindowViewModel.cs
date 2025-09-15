@@ -1,8 +1,44 @@
-﻿namespace WizardPlanet.ViewModels;
+﻿using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
-public partial class MainWindowViewModel : ViewModelBase
+namespace WizardPlanet.ViewModels
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    public partial class MainWindowViewModel : ViewModelBase
+    {
+        // Use the [ObservableProperty] attribute to automatically generate
+        // the property and INotifyPropertyChanged logic.
+        [ObservableProperty]
+        private ViewModelBase? _contentViewModel;
+        
+        [ObservableProperty]
+        private IStorageProvider? _storageProvider;
+        
+        public MainWindowViewModel()
+        {
+        }
+        public MainWindowViewModel(IStorageProvider storageProvider)
+        {
+            ContentViewModel = new HomeViewModel(this, storageProvider);
+        }
+        
+        [RelayCommand]
+        public void NavigateToCreateAnimation(IStorageProvider storageProvider)
+        {
+            ContentViewModel = new CreateAnimationViewModel(storageProvider);
+        }
+        
+        [RelayCommand]
+        private void SetStorageProvider(IStorageProvider storageProvider)
+        {
+            StorageProvider = storageProvider;
+            ContentViewModel = new HomeViewModel(this, StorageProvider);
+        }
+        
+        [RelayCommand]
+        public void NavigateToPlayAnimation()
+        {
+            ContentViewModel = new PlayAnimationViewModel();
+        }
+    }
 }
