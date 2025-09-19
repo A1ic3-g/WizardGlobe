@@ -1,0 +1,32 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WizardPlanet.ViewModels"
+             xmlns:wizardPlanet="clr-namespace:WizardPlanet"
+             xmlns:views="clr-namespace:WizardPlanet.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="WizardPlanet.Views.SelectAnimationView"
+             x:DataType="vm:SelectAnimationViewModel">
+    <Grid ColumnDefinitions="*,Auto,*"
+          Grid.IsSharedSizeScope="True">
+        <ScrollViewer Grid.Column="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="12">
+            <ItemsControl ItemsSource="{Binding AnimationViewModels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="8" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:AnimationGridRowViewModel">
+                        <!-- Each item uses the row view; shared-size columns in the row view will align across items -->
+                        <views:AnimationGridRowView />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

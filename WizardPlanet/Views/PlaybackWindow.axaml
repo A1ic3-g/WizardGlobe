@@ -1,0 +1,16 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:WizardPlanet.ViewModels"
+        x:Class="WizardPlanet.Views.PlaybackWindow"
+        x:DataType="vm:PlayAnimationViewModel"
+        Width="800" Height="600"
+        CanResize="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image Source="{Binding CurrentFrameBitmap}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Stretch="Uniform"
+               Height="{Binding Bounds.Height, RelativeSource={RelativeSource AncestorType=Window}}" />
+    </Grid>
+</Window>

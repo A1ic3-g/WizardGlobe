@@ -1,0 +1,13 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:WizardPlanet.ViewModels"
+             x:Class="WizardPlanet.Views.PlayAnimationView"
+             x:DataType="vm:PlayAnimationViewModel">
+    <StackPanel Orientation="Horizontal" Spacing="8" Margin="12">
+        <Button Content="Play/Pause" Command="{Binding PlayPauseCommand}" />
+        <Button Content="-" Command="{Binding DecreaseSpeedCommand}" ToolTip.Tip="Slower (−50%)" />
+        <Button Content="+" Command="{Binding IncreaseSpeedCommand}" ToolTip.Tip="Faster (+50%)" />
+        <Button Content="Next" Command="{Binding NextFrameCommand}" />
+        <Button Content="Fullscreen" Command="{Binding ToggleFullscreenCommand}" />
+    </StackPanel>
+</UserControl>

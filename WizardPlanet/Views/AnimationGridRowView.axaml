@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:WizardPlanet.ViewModels"
+             xmlns:wizardPlanet="clr-namespace:WizardPlanet"
+             xmlns:converters="clr-namespace:WizardPlanet.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="WizardPlanet.Views.AnimationGridRowView"
+             x:DataType="vm:AnimationGridRowViewModel">
+    <UserControl.Resources>
+        <converters:PathToImageConverter x:Key="PathConverter" />
+    </UserControl.Resources>
+    <!-- Row layout: [Image][Spacer][Content] -->
+    
+    <Button Command="{Binding NavigateToPlayAnimationCommand}"
+            Padding="0"
+            Background="{DynamicResource ThemeControlLowBrush}">
+
+        <Grid ColumnDefinitions="Auto, 12, *"
+              Margin="8"
+              MinHeight="96">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Col_Image"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*" SharedSizeGroup="Col_Content"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Image on the left; fixed dimensions for consistent alignment -->
+            <Border Grid.Column="0"
+                    Width="96" Height="96"
+                    CornerRadius="6"
+                    Background="{DynamicResource ThemeControlLowBrush}">
+                <Image x:Name="PreviewImage"
+                       Source="{Binding PreviewImagePath, Converter={StaticResource PathConverter}}"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Width="92" Height="92" />
+            </Border>
+
+            <!-- Name and description stacked -->
+            <StackPanel Grid.Column="2"
+                        Orientation="Vertical"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding Animation.Name}"
+                           FontWeight="SemiBold"
+                           FontSize="16"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock Text="{Binding Animation.Description}"
+                           Margin="0,4,0,0"
+                           Foreground="{DynamicResource ThemeForegroundLowBrush}"
+                           TextWrapping="Wrap"
+                           MaxLines="3"
+                           TextTrimming="WordEllipsis" />
+            </StackPanel>
+        </Grid>
+    </Button>
+</UserControl>

@@ -13,18 +13,28 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0"/>
+        <PackageReference Include="Avalonia" Version="11.3.6" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.3.6" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.6" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.6" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0"/>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.6" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="OpenCvSharp4" Version="4.11.0.20250507" />
         <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.11.0.20250507" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
+      <Compile Update="Views\AnimationGridRowView.axaml.cs">
+        <DependentUpon>AnimationGridRow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\PlayAnimationView.axaml.cs">
+        <DependentUpon>PlayAnimationView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\PlaybackWindow.axaml.cs">
+        <DependentUpon>PlaybackWindow.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

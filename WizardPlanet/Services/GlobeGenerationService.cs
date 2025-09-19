@@ -63,10 +63,12 @@ public class GlobeGenerationService : IGlobeGenerationService
                 }
             }
         });
-
+        
+        sourceImage.ImWrite(Path.Combine(outputFolder, "original.png"));
+        
         // 3. Generate each frame in parallel by shifting the map
         var shiftPerFrame = (double)wSrc / numFrames;
-
+        
         Parallel.For(0, numFrames, i =>
         {
             var shiftX = i * shiftPerFrame;
@@ -99,7 +101,7 @@ public class GlobeGenerationService : IGlobeGenerationService
                 
             var filename = $"frame_{i:D4}.png";
             var outputPath = Path.Combine(outputFolder, filename);
-            projectedImage.ImWrite(outputPath);
+            projectedImage.ImWrite(outputPath, new ImageEncodingParam(ImwriteFlags.PngCompression, 1));
                 
             Console.WriteLine($"Image saved to {outputPath}");
         });
