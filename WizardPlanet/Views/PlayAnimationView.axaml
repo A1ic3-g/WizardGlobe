@@ -7,7 +7,7 @@
         <Button Content="Play/Pause" Command="{Binding PlayPauseCommand}" />
         <Button Content="-" Command="{Binding DecreaseSpeedCommand}" ToolTip.Tip="Slower (−50%)" />
         <Button Content="+" Command="{Binding IncreaseSpeedCommand}" ToolTip.Tip="Faster (+50%)" />
-        <Button Content="Next" Command="{Binding NextFrameCommand}" />
         <Button Content="Fullscreen" Command="{Binding ToggleFullscreenCommand}" />
+        <Button Content="Open/Close Window" Command="{Binding ReopenPlaybackWindowCommand}" />
     </StackPanel>
 </UserControl>

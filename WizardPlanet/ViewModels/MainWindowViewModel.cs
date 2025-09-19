@@ -1,4 +1,5 @@
-﻿using Avalonia.Platform.Storage;
+﻿using System.Collections.Generic;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -6,14 +7,34 @@ namespace WizardPlanet.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        [ObservableProperty]
+        private Stack<ViewModelBase> _navigationStack = new();
+
         private ViewModelBase? _contentViewModel;
 
-        [ObservableProperty]
-        private IStorageProvider? _storageProvider;
-
-        public MainWindowViewModel()
+        public ViewModelBase? ContentViewModel
         {
+            get => _contentViewModel;
+            set
+            {
+                if (ContentViewModel != null)
+                {
+                    AddToNavigationStack(ContentViewModel);
+                }
+
+                SetProperty(ref _contentViewModel, value);
+            }
+        }
+
+        [ObservableProperty] private IStorageProvider? _storageProvider;
+
+        private void AddToNavigationStack(ViewModelBase? viewModel)
+        {
+            if (viewModel is null)
+            {
+                return;
+            }
+
+            _navigationStack.Push(viewModel);
         }
 
         [RelayCommand]
@@ -29,11 +50,17 @@ namespace WizardPlanet.ViewModels
             ContentViewModel = new HomeViewModel(this, StorageProvider);
         }
 
-        // This command shows the selection screen (kept same name for compatibility)
         [RelayCommand]
         public void NavigateToPlayAnimation()
         {
             ContentViewModel = new SelectAnimationViewModel(this);
+        }
+
+        [RelayCommand]
+        private void NavigateBack()
+        {
+            if (_navigationStack.Count == 0) return;
+            ContentViewModel = _navigationStack.Pop();
         }
     }
 }

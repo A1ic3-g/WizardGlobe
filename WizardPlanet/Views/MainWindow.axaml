@@ -13,5 +13,15 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <ContentControl Content="{Binding ContentViewModel}" />
+    <!-- Add a top bar with a Back button -->
+    <DockPanel LastChildFill="True">
+        <Border DockPanel.Dock="Top" Background="{DynamicResource ThemeBackgroundBrush}" Padding="8">
+            <Button Content="Back"
+                    Command="{Binding NavigateBackCommand}"
+                    HorizontalAlignment="Left" />
+        </Border>
+
+        <!-- Main content -->
+        <ContentControl Content="{Binding ContentViewModel}" />
+    </DockPanel>
 </Window>

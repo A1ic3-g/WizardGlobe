@@ -27,6 +27,13 @@ public class GlobeGenerationService : IGlobeGenerationService
             return;
         }
 
+        // CHANGE: Save the original, unmodified image first as per the requirement.
+        sourceImage.ImWrite(Path.Combine(outputFolder, "original.png"));
+
+        // CHANGE: Flip the source image horizontally in-place for all subsequent transformations.
+        // A horizontal flip is a flip around the Y-axis (FlipMode.Y).
+        Cv2.Flip(sourceImage, sourceImage, FlipMode.Y);
+
         var hSrc = sourceImage.Rows;
         var wSrc = sourceImage.Cols;
         int hDst = wSrc, wDst = wSrc;
@@ -63,12 +70,10 @@ public class GlobeGenerationService : IGlobeGenerationService
                 }
             }
         });
-        
-        sourceImage.ImWrite(Path.Combine(outputFolder, "original.png"));
-        
+
         // 3. Generate each frame in parallel by shifting the map
         var shiftPerFrame = (double)wSrc / numFrames;
-        
+
         Parallel.For(0, numFrames, i =>
         {
             var shiftX = i * shiftPerFrame;
@@ -88,9 +93,9 @@ public class GlobeGenerationService : IGlobeGenerationService
                     }
                 }
             }
-                
+
             Cv2.Remap(
-                src: sourceImage,
+                src: sourceImage, // This will now use the flipped image
                 dst: projectedImage,
                 map1: mapXShifted,
                 map2: mapYBase,
@@ -98,20 +103,17 @@ public class GlobeGenerationService : IGlobeGenerationService
                 borderMode: BorderTypes.Constant,
                 borderValue: new Scalar(0, 0, 0)
             );
-                
+
             var filename = $"frame_{i:D4}.png";
             var outputPath = Path.Combine(outputFolder, filename);
             projectedImage.ImWrite(outputPath, new ImageEncodingParam(ImwriteFlags.PngCompression, 1));
-                
+
             Console.WriteLine($"Image saved to {outputPath}");
         });
     }
 
     public Task CreateGlobeRotationSequenceAsync(string sourceImagePath, string outputFolder, int numFrames = 360)
     {
-        return Task.Run(() =>
-        {
-            CreateGlobeRotationSequence(sourceImagePath, outputFolder, numFrames);
-        });
+        return Task.Run(() => { CreateGlobeRotationSequence(sourceImagePath, outputFolder, numFrames); });
     }
 }

@@ -9,11 +9,9 @@ public partial class AnimationGridRowViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainWindow;
 
-    [ObservableProperty]
-    private GlobeAnimation _animation;
+    [ObservableProperty] private GlobeAnimation _animation;
 
-    [ObservableProperty]
-    private string? _previewImagePath;
+    [ObservableProperty] private string? _previewImagePath;
 
     public AnimationGridRowViewModel(GlobeAnimation animation, MainWindowViewModel mainWindow)
     {
@@ -26,8 +24,6 @@ public partial class AnimationGridRowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToPlayAnimation()
     {
-        // If your PlayAnimationViewModel needs the selected animation, pass it here.
-        // e.g., new PlayAnimationViewModel(Animation)
         _mainWindow.ContentViewModel = new PlayAnimationViewModel(Animation);
     }
 }

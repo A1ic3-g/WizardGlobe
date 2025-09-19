@@ -1,35 +1,28 @@
-﻿// Inside your CreateAnimationViewModel.cs
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
 using System.Text.Json;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using WizardPlanet.Models;
 using WizardPlanet.Services;
 
 namespace WizardPlanet.ViewModels;
+
 public partial class CreateAnimationViewModel(IStorageProvider storageProvider) : ViewModelBase
 {
-    private const int NoFrames = 360;
+    private const int NoFrames = 1;
     private readonly IStorageProvider _storageProvider = storageProvider;
     private IGlobeGenerationService? _globeGenerationService;
-    [ObservableProperty]
-    private string? _inputMapPath;
+    [ObservableProperty] private string? _inputMapPath;
 
-    [ObservableProperty]
-    private string? _animationName;
+    [ObservableProperty] private string? _animationName;
 
-    [ObservableProperty]
-    private string? _animationDescription;
-    
-    [ObservableProperty]
-    private string? _statusMessage;
+    [ObservableProperty] private string? _animationDescription;
+
+    [ObservableProperty] private string? _statusMessage;
 
     [RelayCommand]
     private async Task Browse()
@@ -64,7 +57,7 @@ public partial class CreateAnimationViewModel(IStorageProvider storageProvider) 
         }
 
         var animDir = Directory.CreateDirectory(Path.Combine("Animations", AnimationName));
-            
+
         _globeGenerationService ??= new GlobeGenerationService();
         StatusMessage = "Creating animation...";
         await _globeGenerationService.CreateGlobeRotationSequenceAsync(InputMapPath, animDir.FullName, NoFrames);
@@ -76,7 +69,7 @@ public partial class CreateAnimationViewModel(IStorageProvider storageProvider) 
             DirectoryPath = animDir.Name,
             NoFrames = NoFrames
         };
-        
+
         var animsPath = Path.Combine("Animations", "animations.json");
         var anims = new List<GlobeAnimation>();
         if (File.Exists(animsPath))
